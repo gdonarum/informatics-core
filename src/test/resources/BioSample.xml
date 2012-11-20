@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity name="bio-sample">
+	<text name="name" required="true" />
+	<selection name="matrix" required="true">
+		<enumeration value="Serum" />
+		<enumeration value="Stool" />
+		<enumeration value="Swab" />
+		<enumeration value="Tissue" />
+		<enumeration value="Whole Blood" />
+		<enumeration value="unknown" default="true" />
+		<enumeration value="Other" />
+	</selection>
+	<number name="volume" decimal="true" required="true">
+		<unit value="mL" />
+	</number>
+	<selection name="source" required="true">
+		<enumeration value="CDC" />
+		<enumeration value="DoD" />
+		<enumeration value="unknown" />
+		<enumeration value="Other" />
+	</selection>
+	<date name="received" required="true" />
+	<text name="description" required="false" />
+</entity>

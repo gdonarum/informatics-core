@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity name="machine">
+	<text name="name" required="true" />
+	<date name="install-date" required="true" />
+	<text name="description" required="false" />
+	<image name="photo" required="false" />
+</entity>
