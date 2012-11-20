@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.limray.informatics.core;
 
@@ -25,7 +25,7 @@ public class EntityTest {
     private Document doc;
 
     /**
-     * Sets up the test fixture. 
+     * Sets up the test fixture.
      * (Called before every test case method.)
      */
     @Before
@@ -42,63 +42,92 @@ public class EntityTest {
     }
 
     /**
-     * Tears down the test fixture. 
+     * Tears down the test fixture.
      * (Called after every test case method.)
      */
     @After
     public void tearDown() {
         doc = null;
     }
-	
+
 	@Test
 	public void testDefinition() {
-			
+
 			//read the element into the helper
 			InformaticsEntity entity = new InformaticsEntity();
 			entity.setDefinition(doc.getDocumentElement());
 			assertEquals(entity.getAttributes().size(),6);
 	}
-	
+
 	@Test
-	public void testAttributes() {
-			
+	public void testTextAttributes() {
+
 			//read the element into the helper
 			InformaticsEntity entity = new InformaticsEntity();
 			entity.setDefinition(doc.getDocumentElement());
-			
+
 			// set some values
 			Properties props = new Properties();
 			props.setProperty("junk.name", "laptop");
 			props.setProperty("bio-sample.name", "Blood Sample");
-			props.setProperty("bio-sample.matrix", "Tissue");
-			
+
 			entity.setValues(props);
 			assertEquals(entity.getAttributes().get(0).getValue(), "Blood Sample");
-			assertEquals(entity.getAttributes().get(1).getValue(), "Tissue");
 	}
-	
+
 	@Test
-	public void testLoadProperties() {
-			
+	public void testSelectionAttributes() {
+
 			//read the element into the helper
 			InformaticsEntity entity = new InformaticsEntity();
 			entity.setDefinition(doc.getDocumentElement());
-			
+
+			// set some values
+			Properties props = new Properties();
+			props.setProperty("junk.name", "laptop");
+			props.setProperty("bio-sample.matrix", "Tissue");
+
+			entity.setValues(props);
+			assertEquals(entity.getAttributes().get(1).getValue(), "Tissue");
+	}
+
+	@Test
+	public void testNumberAttributes() {
+
+			//read the element into the helper
+			InformaticsEntity entity = new InformaticsEntity();
+			entity.setDefinition(doc.getDocumentElement());
+			try {
+				entity.getAttribute("volume").setValue("5");
+			} catch (InformaticsCoreException e) {
+				// TODO Auto-generated catch block
+				fail(e.getMessage());
+			}
+			assertEquals(entity.getAttributes().get(2).getValue(), "5 mL");
+	}
+
+	@Test
+	public void testLoadProperties() {
+
+			//read the element into the helper
+			InformaticsEntity entity = new InformaticsEntity();
+			entity.setDefinition(doc.getDocumentElement());
+
 			// set some values
 			Properties props = new Properties();
 			props.setProperty("junk.name", "laptop");
 			props.setProperty("bio-sample.name", "Blood Sample");
 			props.setProperty("bio-sample.matrix", "Tissue");
-			
+
 			entity.setValues(props);
-			
+
 			InformaticsEntity entity2 = new InformaticsEntity();
 			entity2.setDefinition(doc.getDocumentElement());
 			entity2.setValues(entity.getValues());
 			assertEquals(entity2.getAttributes().size(),6);
 			assertEquals(entity2.getAttributes().get(0).getValue(), "Blood Sample");
 			assertEquals(entity2.getAttributes().get(1).getValue(), "Tissue");
-			
+
 			// check all attributes
 			for(int i=0; i<entity.getAttributes().size(); i++) {
 				assertEquals(entity.getAttributes().get(i).getName(),entity.getAttributes().get(i).getName());

@@ -24,18 +24,9 @@ public class InformaticsEntity {
 	private String name = "UNSET";
 	// TODO: make this a hierarchy instead of an array
 	private ArrayList<InformaticsAttribute> attributes = new ArrayList<InformaticsAttribute>();
-	private long primaryKey = 0;
 	
 	public InformaticsEntity() {
 		
-	}
-	
-	public long getPrimaryKey() {
-		return primaryKey;
-	}
-	
-	public void setPrimaryKey(long primaryKey) {
-		this.primaryKey=primaryKey;
 	}
 	
 	public void setDefinition(Element xml) {
@@ -102,6 +93,12 @@ public class InformaticsEntity {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public InformaticsAttribute getAttribute(String name) throws InformaticsCoreException {
+		for(InformaticsAttribute att : getAttributes())
+			return att;
+		throw new InformaticsCoreException("Invalid Attribute Name");
 	}
 
 }
