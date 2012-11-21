@@ -7,7 +7,7 @@ public class NumberAttribute extends InformaticsAttribute {
 	private double doubleValue = Double.NaN;
 	private boolean decimal = false;
 	private ArrayList<String> units = new ArrayList<String>();
-	private int valueIndex = -1;
+	private int valueIndex = 0;
 
 	@Override
 	public String getValue() {
@@ -18,7 +18,7 @@ public class NumberAttribute extends InformaticsAttribute {
 			out += intValue;
 		}
 		if(units.size()>0)
-			out += " " + units.indexOf(valueIndex);
+			out += " " + units.get(valueIndex);
 		return out;
 	}
 

@@ -98,12 +98,27 @@ public class EntityTest {
 			InformaticsEntity entity = new InformaticsEntity();
 			entity.setDefinition(doc.getDocumentElement());
 			try {
+				entity.getAttribute("volume").setValue("5.123456789123456 mL");
+			} catch (InformaticsCoreException e) {
+				// TODO Auto-generated catch block
+				fail(e.getMessage());
+			}
+			assertEquals(entity.getAttributes().get(2).getValue(), "5.123456789123456 mL");
+	}
+
+	@Test
+	public void testNumberDefaultUnits() {
+
+			//read the element into the helper
+			InformaticsEntity entity = new InformaticsEntity();
+			entity.setDefinition(doc.getDocumentElement());
+			try {
 				entity.getAttribute("volume").setValue("5");
 			} catch (InformaticsCoreException e) {
 				// TODO Auto-generated catch block
 				fail(e.getMessage());
 			}
-			assertEquals(entity.getAttributes().get(2).getValue(), "5 mL");
+			assertEquals(entity.getAttributes().get(2).getValue(), "5.0 L");
 	}
 
 	@Test

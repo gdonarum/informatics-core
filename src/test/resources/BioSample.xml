@@ -12,6 +12,7 @@
 	</selection>
 	<number name="volume" decimal="true" required="true">
 		<unit value="mL" />
+		<unit value="L" default="true" />
 	</number>
 	<selection name="source" required="true">
 		<enumeration value="CDC" />

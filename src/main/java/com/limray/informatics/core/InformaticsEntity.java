@@ -96,8 +96,10 @@ public class InformaticsEntity {
 	}
 	
 	public InformaticsAttribute getAttribute(String name) throws InformaticsCoreException {
-		for(InformaticsAttribute att : getAttributes())
-			return att;
+		for(InformaticsAttribute att : getAttributes()) {
+			if(att.getName().equals(name))
+				return att;
+		}
 		throw new InformaticsCoreException("Invalid Attribute Name");
 	}
 
