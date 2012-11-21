@@ -44,5 +44,6 @@ public abstract class InformaticsAttribute implements Comparable<Object> {
 		if(isRequired() && (getValue()==null || getValue().isEmpty()))
 			return false;
 		return true;
+		// TODO: extend this method in child classes.  Make sure to call parent.isValid()
 	}
 }
