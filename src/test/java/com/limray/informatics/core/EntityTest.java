@@ -161,7 +161,7 @@ public class EntityTest {
 			Properties props = new Properties();
 			props.setProperty("junk.name", "laptop");
 			props.setProperty("bio-sample.name", "Blood Sample");
-			props.setProperty("bio-sample.matrix", "Tissue");
+			props.setProperty("bio-sample.source", "DoD");
 
 			entity.setValues(props);
 
@@ -170,7 +170,8 @@ public class EntityTest {
 			entity2.setValues(entity.getValues());
 			assertEquals(entity2.getAttributes().size(),6);
 			assertEquals(entity2.getAttributes().get(0).getValue(), "Blood Sample");
-			assertEquals(entity2.getAttributes().get(1).getValue(), "Tissue");
+			assertEquals(entity2.getAttributes().get(1).getValue(), "unknown");
+			assertEquals(entity2.getAttributes().get(3).getValue(), "DoD");
 
 			// check all attributes
 			for(int i=0; i<entity.getAttributes().size(); i++) {
