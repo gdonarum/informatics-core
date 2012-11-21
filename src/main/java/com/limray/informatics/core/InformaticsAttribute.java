@@ -35,4 +35,14 @@ public abstract class InformaticsAttribute implements Comparable<Object> {
 	 * @param valueIndex the valueIndex to set
 	 */
 	public abstract void setValue(String value);
+	
+	/**
+	 * Check if the attribute value is valid.
+	 */
+	public boolean isValid() {
+		// see if required field is set
+		if(isRequired() && (getValue()==null || getValue().isEmpty()))
+			return false;
+		return true;
+	}
 }

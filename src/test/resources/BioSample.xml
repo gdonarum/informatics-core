@@ -22,4 +22,5 @@
 	</selection>
 	<date name="received" required="true" />
 	<text name="description" required="false" />
+	<text name="id-code" required="true" />
 </entity>

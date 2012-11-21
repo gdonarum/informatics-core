@@ -56,7 +56,7 @@ public class EntityTest {
 			//read the element into the helper
 			InformaticsEntity entity = new InformaticsEntity();
 			entity.setDefinition(doc.getDocumentElement());
-			assertEquals(entity.getAttributes().size(),6);
+			assertEquals(entity.getAttributes().size(),7);
 	}
 
 	@Test
@@ -168,7 +168,7 @@ public class EntityTest {
 			InformaticsEntity entity2 = new InformaticsEntity();
 			entity2.setDefinition(doc.getDocumentElement());
 			entity2.setValues(entity.getValues());
-			assertEquals(entity2.getAttributes().size(),6);
+			assertEquals(entity2.getAttributes().size(),7);
 			assertEquals(entity2.getAttributes().get(0).getValue(), "Blood Sample");
 			assertEquals(entity2.getAttributes().get(1).getValue(), "unknown");
 			assertEquals(entity2.getAttributes().get(3).getValue(), "DoD");
@@ -177,6 +177,29 @@ public class EntityTest {
 			for(int i=0; i<entity.getAttributes().size(); i++) {
 				assertEquals(entity.getAttributes().get(i).getName(),entity.getAttributes().get(i).getName());
 				assertEquals(entity.getAttributes().get(i).getValue(),entity.getAttributes().get(i).getValue());
+			}
+	}
+
+	@Test
+	public void testValidation() {
+
+			//read the element into the helper
+			InformaticsEntity entity = new InformaticsEntity();
+			entity.setDefinition(doc.getDocumentElement());
+			
+			try {
+				entity.getAttribute("id-code").setValue("1234rtt");
+			} catch (InformaticsCoreException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			boolean[] requiredFields = {false,true,true,false,false,true,true};
+
+			// check all attributes
+			for(int i=0; i<entity.getAttributes().size(); i++) {
+				String name = entity.getAttributes().get(i).getName();
+				assertEquals(name+entity.getAttributes().get(i).isValid(),name+requiredFields[i]);
 			}
 	}
 
