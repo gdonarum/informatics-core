@@ -23,6 +23,7 @@ public class DateAttribute extends InformaticsAttribute {
 			this.date = df.parse(value);
 		} catch (ParseException e) {
 			// TODO: do we have to do anything here?
+			e.printStackTrace();
 		}		
 	}
 

@@ -92,6 +92,20 @@ public class EntityTest {
 	}
 
 	@Test
+	public void testSelectionDefault() {
+
+			//read the element into the helper
+			InformaticsEntity entity = new InformaticsEntity();
+			entity.setDefinition(doc.getDocumentElement());
+
+			try {
+				assertEquals(entity.getAttribute("matrix").getValue(), "unknown");
+			} catch (InformaticsCoreException e) {
+				fail("Invalid attribute name");
+			}
+	}
+
+	@Test
 	public void testNumberAttributes() {
 
 			//read the element into the helper
@@ -119,6 +133,21 @@ public class EntityTest {
 				fail(e.getMessage());
 			}
 			assertEquals(entity.getAttributes().get(2).getValue(), "5.0 L");
+	}
+
+	@Test
+	public void testDate() {
+
+			//read the element into the helper
+			InformaticsEntity entity = new InformaticsEntity();
+			entity.setDefinition(doc.getDocumentElement());
+			try {
+				entity.getAttribute("received").setValue("2012-11-20 21:02:35");
+			} catch (InformaticsCoreException e) {
+				// TODO Auto-generated catch block
+				fail(e.getMessage());
+			}
+			assertEquals(entity.getAttributes().get(4).getValue(), "2012-11-20 21:02:35");
 	}
 
 	@Test
